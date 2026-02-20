@@ -4,12 +4,11 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { userAvatar } from "../utils/constants";
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -32,38 +31,30 @@ const Login = () => {
 
     if (!isSignInForm) {
       // Sign up Logic
-      createUserWithEmailAndPassword(auth, email, password)
+       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-
           updateProfile(user, {
             displayName: fullName,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: userAvatar,
           })
             .then(() => {
               // Profile updated!
               // ...
-              {
-                const { uid, email, displayName } = auth.currentUser;
-                dispatch(
-                  addUser({ uid: uid, email: email, displayName: displayName }),
-                );
-              }
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
               setErrorMessage(error.message);
             });
-          console.log(user);
+
         })
 
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage + "-" + errorCode);
-          console.log(errorCode, errorMessage);
+
         });
     } else {
       // Sign in Logic
@@ -71,8 +62,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
+
           // ...
         })
         .catch((error) => {
