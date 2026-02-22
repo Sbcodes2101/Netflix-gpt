@@ -27,8 +27,9 @@
 -fetch data for trailer video
 -embedded the youtube video and make it autoplay and mute
 -tailwind classes to make main container look awesome
-
-
+Build Secondary Component
+-Build Movie List
+-Build Movie Card
 
 #Features
 -Login/SignUp
