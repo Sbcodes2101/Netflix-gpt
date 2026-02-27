@@ -30,6 +30,11 @@
 Build Secondary Component
 -Build Movie List
 -Build Movie Card
+-made popular custom hooks
+-GPT search Feature
+-Multi-language feature in our app
+
+
 
 #Features
 -Login/SignUp

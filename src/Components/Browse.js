@@ -5,7 +5,10 @@ import SecondaryContainer from "./SecondaryContainer";
 import usePopularMovies from "../Hooks/usePopularMovies";
 import useTopRatedMovies from "../Hooks/useTopRatedMovies";
 import useUpcomingMovies from "../Hooks/useUpcomingMovies";
+import GptSearch from "./GptSearch";
+import { useSelector } from "react-redux";
 const Browse = ()=>{
+    const showGptSearch = useSelector(store=>store.gpt.showGptSearch)
     // Fetch data from TMDB API and update store
     useNowPlayingMovies();
     usePopularMovies();
@@ -14,10 +17,19 @@ const Browse = ()=>{
 
     return(
     <div>
-        <div className="relative z-10 bg-gradient-to-b from-black/90 to-black/50">
+        <div className="z-10 bg-gradient-to-b">
         <Header />
-        <MainContainer />
-        <SecondaryContainer />
+        {
+          showGptSearch ?(
+             <GptSearch />
+            ):(
+            <>
+              <MainContainer/>
+            <SecondaryContainer />
+            </>            
+          ) 
+        }
+        
         {/* 
            Main-container
              - videoBackground
