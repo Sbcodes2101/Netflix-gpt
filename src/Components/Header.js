@@ -71,7 +71,7 @@ const Header = () => {
         {user && (
           <>
             {showGptSearch && (<select
-              className="p-2 bg-gray-900 text-white m-2 rounded-lg"
+              className="p-2 bg-gray-900 sm:bg-blue-900 md: text-white m-2 rounded-lg"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
