@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstants";
 import { API_OPTIONS } from "../utils/constants";
 import { addGptMovieResult } from "../utils/gptSlice";
+import {OPENAPI_KEY} from "../utils/constants";
 
 
 const GptSearchBar = () => {
@@ -30,7 +31,7 @@ const GptSearchBar = () => {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer `+process.env.REACT_APP_OPENAI_KEY,
+          "Authorization": `Bearer ${OPENAPI_KEY}`,
           "Content-Type": "application/json",
           "HTTP-Referer": "http://localhost:3000", // required
           "X-Title": "Movie GPT App", // optional but recommended
